@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { CartContext } from '../contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
 
-const API_BASE_URL = 'https://3d-api-two.vercel.app';
+const API_BASE_URL = 'https://3d-api-work.vercel.app';
 
 function ProductCard({ product }) {
     const { addToCart } = useContext(CartContext);

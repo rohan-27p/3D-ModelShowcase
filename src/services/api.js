@@ -2,7 +2,7 @@
 // // API methods
 export const fetchProducts = async () => {
     try {
-        const response = await fetch('https://3d-api-two.vercel.app/api/products');
+        const response = await fetch('https://3d-api-work.vercel.app/api/products');
         if (!response.ok) {
             throw new Error('Failed to fetch products');
         }
@@ -15,7 +15,7 @@ export const fetchProducts = async () => {
 
 export const fetchFeaturedProduct = async () => {
     try {
-        const response = await fetch('https://3d-api-two.vercel.app/api/products/featured');
+        const response = await fetch('https://3d-api-work.vercel.app/api/products/featured');
         if (!response.ok) {
             throw new Error('Failed to fetch featured product');
         }
@@ -29,7 +29,7 @@ export const fetchFeaturedProduct = async () => {
 
 export const fetchProductById = async (id) => {
     try {
-        const response = await fetch(`https://3d-api-two.vercel.app/api/products/${id}`);
+        const response = await fetch(`https://3d-api-work.vercel.app/api/products/${id}`);
         if (!response.ok) {
             throw new Error('Failed to fetch product');
         }

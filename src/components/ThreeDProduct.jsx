@@ -5,7 +5,7 @@ import { fetchProducts } from '../services/api';
 import { useSearchParams } from 'react-router-dom';
 // thissss filee took me 7 hours to make, i was so tired and frustrated but i finally got it to work, spent most of the time fixing cors and other errors
 // Base URL of the API where models are hosted
-const API_BASE_URL = 'https://3d-api-two.vercel.app';
+const API_BASE_URL = 'https://3d-api-work.vercel.app';
 
 // Simple cube placeholder when model fails to load
 function FallbackCube() {
