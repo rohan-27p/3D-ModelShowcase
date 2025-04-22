@@ -1,8 +1,9 @@
-import { useState, useEffect, Suspense, useRef } from 'react';
+import { useState, useEffect, Suspense, useRef, useContext } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, useGLTF } from '@react-three/drei';
+import { OrbitControls, Bounds, Center, useGLTF } from '@react-three/drei'; 
 import { fetchProducts } from '../services/api';
 import { useSearchParams } from 'react-router-dom';
+import { CartContext } from '../contexts/CartContext';
 // thissss filee took me 7 hours to make, i was so tired and frustrated but i finally got it to work, spent most of the time fixing cors and other errors
 // Base URL of the API where models are hosted
 const API_BASE_URL = 'https://3d-api-work.vercel.app';
@@ -41,8 +42,11 @@ function Model({ modelPath }) {
     />
   );
 }
-
 function ProductDisplay({ product, productRef }) {
+    const {addToCart} = useContext(CartContext)
+    const handleAddToCart = () =>{
+        addToCart(product);
+    }
   return (
     <div ref={productRef} className="mb-32 last:mb-0">
       <div className="mb-8">
@@ -52,38 +56,46 @@ function ProductDisplay({ product, productRef }) {
         <p className="text-sm text-gray-500 mt-1">Category: {product.category}</p>
       </div>
 
-      <div className="h-96 bg-gray-50 rounded-lg shadow-inner">
-        <Canvas camera={{ position: [0, 0, 0], fov: 50 }} shadows>
-          {/* Enhanced lighting setup */}
-          <ambientLight intensity={1.5} />
-          <spotLight position={[10, 10, 10]} intensity={1.5} angle={0.3} penumbra={1} castShadow />
-          <pointLight position={[-10, -10, -10]} intensity={1} />
-          <directionalLight position={[0, 5, 5]} intensity={3.5} castShadow />
-          
+      <div className="h-96 bg-white rounded-lg overflow-hidden shadow">
+        <Canvas
+          // turn *all* shadows off
+          shadows={false}
+          // give it a white background
+          style={{ background: '#fff' }}
+          camera={{ position: [0, 1.5, 5], fov: 45 }}
+        >
+          <ambientLight intensity={1.6} />
+          <directionalLight position={[5, 10, 5]} intensity={0.8} />
+
           <Suspense fallback={<FallbackCube />}>
             {product.modelPath ? (
-              <Model modelPath={product.modelPath} />
+              // auto‐fit the model to camera
+              <Bounds fit focus clip margin={1.2}>
+                <Center>
+                  <Model modelPath={product.modelPath} />
+                </Center>
+              </Bounds>
             ) : (
-              <FallbackCube />
+              <Center><FallbackCube /></Center>
             )}
           </Suspense>
 
-          <OrbitControls 
+          <OrbitControls
             enablePan={false}
-            minDistance={2}
-            maxDistance={10}
+            // restrict how far in/out you can zoom
+            minDistance={1}
+            maxDistance={20}
+            // don't let the camera flop upside‐down
+            minPolarAngle={0.1}
+            maxPolarAngle={Math.PI / 2}
           />
-
-          {/* Ground plane for shadows */}
-          <mesh rotation={[-Math.PI/2, 0, 0]} position={[0, -1.5, 0]} receiveShadow>
-            <planeGeometry args={[100, 100]} />
-            <shadowMaterial opacity={0.3} />
-          </mesh>
         </Canvas>
       </div>
       
       <div className="mt-4 flex justify-end">
-        <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+        <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+            onClick={handleAddToCart}
+        >
           Add to Cart
         </button>
       </div>
