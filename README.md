@@ -88,7 +88,7 @@ MIT License 2025
 
 ## 👤 Author
 
-Your Name - [Rohan](https://github.com/rohan-27p)
+[Rohan](https://github.com/rohan-27p)
 
 ## 🙏 Acknowledgements
 
