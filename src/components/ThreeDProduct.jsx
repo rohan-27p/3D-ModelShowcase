@@ -1,6 +1,6 @@
 import { useState, useEffect, Suspense, useRef, useContext } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Bounds, Center, useGLTF } from '@react-three/drei'; 
+import { OrbitControls, Bounds, Center,Environment, useGLTF } from '@react-three/drei'; 
 import { fetchProducts } from '../services/api';
 import { useSearchParams } from 'react-router-dom';
 import { CartContext } from '../contexts/CartContext';
@@ -8,7 +8,7 @@ import { CartContext } from '../contexts/CartContext';
 // Base URL of the API where models are hosted
 const API_BASE_URL = 'https://3d-api-work.vercel.app';
 
-// Simple cube placeholder when model fails to load
+// Simple cube placeholder when model fails or takes time to load
 function FallbackCube() {
   return (
     <mesh>
@@ -62,19 +62,27 @@ function ProductDisplay({ product, productRef }) {
           shadows={false}
           // give it a white background
           style={{ background: '#fff' }}
-          camera={{ position: [0, 1.5, 5], fov: 45 }}
+          camera={{ position: [0, 0, 6], fov: 45 }}
+          gl = {{toneMappingExposure:1.0}}
         >
-          <ambientLight intensity={1.6} />
-          <directionalLight position={[5, 10, 5]} intensity={0.8} />
+          <ambientLight intensity={1.0} />
+          <hemisphereLight
+            skyColor="#ffffff"
+            groundColor="#444444"
+            intensity={0.7}
+          />
+          <directionalLight position={[5, 5, 5]} intensity={1.0} />
+          <directionalLight position={[-5, 5, -5]} intensity={0.7} />
 
           <Suspense fallback={<FallbackCube />}>
+          <Environment preset='studio' background={false}/>
             {product.modelPath ? (
               // auto‐fit the model to camera
-              <Bounds fit focus clip margin={1.2}>
-                <Center>
-                  <Model modelPath={product.modelPath} />
-                </Center>
-              </Bounds>
+                <Bounds fit focus clip margin={1.2}>
+                    <Center>
+                    <Model modelPath={product.modelPath} />
+                    </Center>
+                </Bounds>
             ) : (
               <Center><FallbackCube /></Center>
             )}
@@ -86,8 +94,10 @@ function ProductDisplay({ product, productRef }) {
             minDistance={1}
             maxDistance={20}
             // don't let the camera flop upside‐down
-            minPolarAngle={0.1}
-            maxPolarAngle={Math.PI / 2}
+            minPolarAngle={0}
+            maxPolarAngle={Math.PI}
+            // minAzimuthAngle={-Math.PI/4}
+            // maxAzimuthAngle={Math.PI/4}
           />
         </Canvas>
       </div>
@@ -137,7 +147,7 @@ function ThreeDProduct() {
     loadProducts();
   }, []);
 
-  // Scroll to focused product when products load or URL changes
+  // Scroll to focused product when products load or URL changes, when click on a product in that endpoint,takes you to the home page
   useEffect(() => {
     const productId = searchParams.get('product');
     if (productId && products.length > 0) {
