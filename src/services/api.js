@@ -1,8 +1,9 @@
-
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 // // API methods
 export const fetchProducts = async () => {
+    console.log('Fetching products from:', `${API_BASE_URL}/api/products`);
     try {
-        const response = await fetch('https://3d-api-work.vercel.app/api/products');
+        const response = await fetch(`${API_BASE_URL}/api/products`);
         if (!response.ok) {
             throw new Error('Failed to fetch products');
         }
@@ -15,7 +16,7 @@ export const fetchProducts = async () => {
 
 export const fetchFeaturedProduct = async () => {
     try {
-        const response = await fetch('https://3d-api-work.vercel.app/api/products/featured');
+        const response = await fetch(`${API_BASE_URL}/api/products/featured`);
         if (!response.ok) {
             throw new Error('Failed to fetch featured product');
         }
@@ -29,7 +30,7 @@ export const fetchFeaturedProduct = async () => {
 
 export const fetchProductById = async (id) => {
     try {
-        const response = await fetch(`https://3d-api-work.vercel.app/api/products/${id}`);
+        const response = await fetch(`${API_BASE_URL}/api/products/${id}`);
         if (!response.ok) {
             throw new Error('Failed to fetch product');
         }
