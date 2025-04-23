@@ -75,7 +75,8 @@ function ProductDisplay({ product, productRef }) {
           <directionalLight position={[-5, 5, -5]} intensity={0.7} />
 
           <Suspense fallback={<FallbackCube />}>
-          <Environment preset='studio' background={false}/>
+          {/* //finally got the environment preset to work ,changed to local file */}
+          <Environment files="/hdr/studio_small_03_1k.hdr" background={false}/>
             {product.modelPath ? (
               // auto‐fit the model to camera
                 <Bounds fit focus clip margin={1.2}>
@@ -125,7 +126,7 @@ function ThreeDProduct() {
       try {
         const fetchedProducts = await fetchProducts();
         
-        // Process all products to have proper model paths
+        //this is to process all products to have proper model paths
         const processedProducts = fetchedProducts.map(product => ({
           ...product,
           modelPath: product.modelPath ? (
@@ -147,7 +148,7 @@ function ThreeDProduct() {
     loadProducts();
   }, []);
 
-  // Scroll to focused product when products load or URL changes, when click on a product in that endpoint,takes you to the home page
+  //scroll to focused product when products load or URL changes, when click on a product in that endpoint,takes you to the home page
   useEffect(() => {
     const productId = searchParams.get('product');
     if (productId && products.length > 0) {
@@ -183,6 +184,7 @@ function ThreeDProduct() {
 }
 
 //you can clear any previous preloads to avoid CORS errors
+useGLTF.preload();
 useGLTF.clear();
 
 export default ThreeDProduct;
