@@ -48,12 +48,6 @@ npm run dev
 5. Proceed to checkout with your selected items
 6. Complete the purchase with shipping and payment details
 
-## 🖼️ Screenshots
-
-![Homepage](https://via.placeholder.com/400x200?text=Homepage)
-![Product Detail](https://via.placeholder.com/400x200?text=Product+Detail)
-
-
 ## 🛠️ API Implementation
 
 The project uses serverless API functions deployed on Vercel to fetch 3D model data including names, descriptions, prices, and images.
