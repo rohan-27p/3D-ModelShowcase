@@ -2,7 +2,7 @@
 
 A full-featured e-commerce platform for browsing, purchasing, and managing 3D models with a clean, intuitive interface.
 
-![Project Screenshot](https://via.placeholder.com/800x400?text=3D+Model+Marketplace+Screenshot)
+![Project Screenshot](https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif)
 
 ## ✨ Features
 
@@ -13,6 +13,8 @@ A full-featured e-commerce platform for browsing, purchasing, and managing 3D mo
 - **Responsive Design** - Optimized experience across devices
 - **Secure Checkout** - With comprehensive input validation
 - **CORS Enabled** - API configured to handle cross-origin requests properly
+
+![Project Screenshot](https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif)
 
 ## 🚀 Tech Stack
 
@@ -36,7 +38,7 @@ npm install
 # Start the development server
 npm run dev
 ```
-
+![Project Screenshot](https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif)
 ## 📱 Usage
 
 1. Browse the showcase of available 3D models
@@ -45,12 +47,6 @@ npm run dev
 4. Adjust quantities or remove items as needed
 5. Proceed to checkout with your selected items
 6. Complete the purchase with shipping and payment details
-
-## 🖼️ Screenshots
-
-![Homepage](https://via.placeholder.com/400x200?text=Homepage)
-![Product Detail](https://via.placeholder.com/400x200?text=Product+Detail)
-
 
 ## 🛠️ API Implementation
 
@@ -64,6 +60,7 @@ The API is configured to handle Cross-Origin Resource Sharing (CORS) requests:
 - Proper handling of preflight requests
 - Custom headers allowed: X-Requested-With, Content-Type, Accept
 
+![Project Screenshot](https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif)
 ```javascript
 // API endpoint implementation example
 module.exports = (req, res) => {
@@ -81,6 +78,8 @@ module.exports = (req, res) => {
     // ...
 };
 ```
+
+![Project Screenshot](https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif)
 
 ## 📄 License
 
