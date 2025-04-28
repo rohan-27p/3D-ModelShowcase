@@ -6,7 +6,7 @@ import { useSearchParams } from 'react-router-dom';
 import { CartContext } from '../contexts/CartContext';
 // thissss filee took me 7 hours to make, i was so tired and frustrated but i finally got it to work, spent most of the time fixing cors and other errors
 // Base URL of the API where models are hosted
-const API_BASE_URL = 'https://3d-api-work.vercel.app';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // Simple cube placeholder when model fails or takes time to load
 function FallbackCube() {
