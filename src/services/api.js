@@ -1,7 +1,7 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL;
+const API_BASE_URL = 'https://3d-api-work.vercel.app';
 // // API methods
 export const fetchProducts = async () => {
-    console.log('Fetching products from:', `${API_BASE_URL}/api/products`);
+    // console.log( `${API_BASE_URL}/api/products`);
     try {
         const response = await fetch(`${API_BASE_URL}/api/products`);
         if (!response.ok) {
@@ -13,7 +13,7 @@ export const fetchProducts = async () => {
         throw error;
     }
 };
-
+//no use of this 
 export const fetchFeaturedProduct = async () => {
     try {
         const response = await fetch(`${API_BASE_URL}/api/products/featured`);

@@ -9,7 +9,7 @@ function Products() {
     const [error, setError] = useState(null);
     const [activeCategory, setActiveCategory] = useState('all');
 
-    // Get unique categories from products
+    //simple logic to get unique categories from products
     const categories = ['all', ...new Set(products.map(product => product.category))];
 
     useEffect(() => {

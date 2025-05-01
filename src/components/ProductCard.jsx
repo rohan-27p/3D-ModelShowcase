@@ -40,7 +40,7 @@ function ProductCard({ product }) {
                         className="h-full w-full object-contain"
                         onError={(e) => {
                             e.target.onerror = null;
-                            e.target.src = '/placeholder.png'; // You can add a placeholder image in public folder
+                            e.target.src = '/placeholder.png';
                         }}
                     />
                 ) : (
